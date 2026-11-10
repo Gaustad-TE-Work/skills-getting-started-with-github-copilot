@@ -1,4 +1,6 @@
+from concurrent.futures import ThreadPoolExecutor
 from copy import deepcopy
+from threading import Barrier
 
 import pytest
 
@@ -71,6 +73,21 @@ def test_signup_to_full_activity_does_not_change_rosters(client, activity_data):
     assert response.status_code == 400
     assert response.json() == {"detail": "Activity is full"}
     assert activity_data == expected
+
+
+def test_concurrent_signup_does_not_exceed_activity_capacity(client, activity_data):
+    email = "student@mergington.edu"
+    start = Barrier(2)
+
+    def signup():
+        start.wait()
+        return client.post("/activities/Chess Club/signup", params={"email": email})
+
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        responses = list(executor.map(lambda _: signup(), range(2)))
+
+    assert sorted(response.status_code for response in responses) == [200, 400]
+    assert activity_data["Chess Club"]["participants"].count(email) == 1
 
 
 @pytest.mark.parametrize("method, action", [("POST", "signup"), ("DELETE", "unregister")])
