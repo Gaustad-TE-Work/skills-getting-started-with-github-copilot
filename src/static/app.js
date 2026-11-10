@@ -62,7 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 messageDiv.textContent = result.message;
                 messageDiv.className = "success";
+                const selectedActivity = activitySelect.value;
                 await fetchActivities();
+                activitySelect.value = selectedActivity;
               } catch (error) {
                 messageDiv.textContent = error.message || "Failed to unregister participant. Please try again.";
                 messageDiv.className = "error";
