@@ -74,6 +74,77 @@ section h3 {
   margin-bottom: 8px;
 }
 
+.activity-participants {
+  margin-top: 15px;
+  padding-top: 12px;
+  border-top: 1px solid #ddd;
+}
+
+.activity-participants h5 {
+  margin-bottom: 8px;
+  color: #1a237e;
+  font-size: 14px;
+}
+
+.activity-participants ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.activity-participants li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 5px 0;
+  font-size: 14px;
+}
+
+.activity-participants li span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.delete-participant {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  color: #b42318;
+  background-color: transparent;
+  border: 1px solid #e6c9c6;
+  border-radius: 4px;
+}
+
+.delete-participant:hover {
+  background-color: #ffebee;
+}
+
+.delete-participant:focus-visible {
+  outline: 2px solid #b42318;
+  outline-offset: 2px;
+}
+
+.delete-participant:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.delete-participant svg {
+  width: 16px;
+  height: 16px;
+}
+
+.activity-participants .participants-empty {
+  margin-bottom: 0;
+  color: #666;
+  font-size: 14px;
+  font-style: italic;
+}
+
 .form-group {
   margin-bottom: 15px;
 }

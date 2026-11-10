@@ -6,6 +6,7 @@ A super simple FastAPI application that allows students to view and sign up for 
 
 - View all available extracurricular activities
 - Sign up for activities
+- Unregister participants from activities
 
 ## Getting Started
 
@@ -31,6 +32,7 @@ A super simple FastAPI application that allows students to view and sign up for 
 | ------ | ----------------------------------------------------------------- | ------------------------------------------------------------------- |
 | GET    | `/activities`                                                     | Get all activities with their details and current participant count |
 | POST   | `/activities/{activity_name}/signup?email=student@mergington.edu` | Sign up for an activity                                             |
+| DELETE | `/activities/{activity_name}/unregister?email=student@mergington.edu` | Unregister a participant from an activity                         |
 
 ## Data Model
 
@@ -48,3 +50,16 @@ The application uses a simple data model with meaningful identifiers:
    - Grade level
 
 All data is stored in memory, which means data will be reset when the server restarts.
+
+## Backend Tests
+
+From the repository root, install the dependencies and run the pytest suite:
+
+```bash
+python -m pip install -r requirements.txt
+python -m pytest tests/ -q
+```
+
+Tests use Arrange-Act-Assert sections and fresh activity data for each test.
+FastAPI's TestClient runs requests in-process, without starting a server or using
+a network port.
